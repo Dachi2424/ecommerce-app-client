@@ -1,0 +1,55 @@
+
+@keyframes fadeIn {
+  0%{transform: translateY(100svh);}
+  100%{transform: translateY(0svh);}
+}
+
+@keyframes fadeOut {
+  0%{transform: translateY(0svh);}
+  100%{transform: translateY(100svh);}
+}
+
+@keyframes bgAppear {
+  0%{opacity: 0;}
+  100%{opacity: 1;}
+}
+
+@keyframes bgDisappear {
+  0%{opacity: 1;}
+  100%{opacity: 0;}
+}
+
+
+
+@media screen and (min-width: 300px) {
+  .slider{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100svh;
+    &__dark-background{
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .6);
+      animation: bgAppear .5s linear forwards;
+      &--closing{
+        animation: bgDisappear .5s linear forwards; 
+      }
+    }
+    &__main-container{
+      width: 100%;
+      height: 93svh;
+      background-color: white;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transform: translateY(100svh);
+      animation: fadeIn .5s ease-in-out forwards;
+      &--closing{
+        animation: fadeOut .5s ease-in-out forwards;
+      }
+    }
+  }
+}

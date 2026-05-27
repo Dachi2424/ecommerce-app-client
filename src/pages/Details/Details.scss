@@ -1,0 +1,24 @@
+
+
+@media screen and (min-width: 300px) {
+  .details{
+    padding: 20px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .details{
+    padding: 30px 80px 30px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .details{
+    padding: 30px 100px 30px;
+  }
+}
+@media screen and (min-width: 1300px) {
+  .details{
+    padding: 30px 160px 30px;
+  }
+}

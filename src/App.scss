@@ -1,0 +1,214 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  font-family: halveticaNeue;
+}
+
+input, textarea, select, option, a, label, button{
+  font-size: 16px;
+  outline: none;
+  font-family: halveticaNeue;
+}
+
+
+:root{
+  --main-gray-color: rgba(0, 0, 0, 0.6);
+  --main-color: #035EBB;
+  --main-color-light: #02C5FE;
+}
+
+// #region halvetica fonts
+@font-face {
+  font-family: halveticaNeue;
+  src: url("./assets/fonts/helvetica-neue-5/HelveticaNeueUltraLight.otf");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: halveticaNeue;
+  src: url("./assets/fonts/helvetica-neue-5/HelveticaNeueThin.otf");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: halveticaNeue;
+  src: url("./assets/fonts/helvetica-neue-5/HelveticaNeueLight.otf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: halveticaNeue;
+  src: url("./assets/fonts/helvetica-neue-5/HelveticaNeueRoman.otf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: halveticaNeue;
+  src: url("./assets/fonts/helvetica-neue-5/HelveticaNeueMedium.otf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: halveticaNeue;
+  src: url("./assets/fonts/helvetica-neue-5/HelveticaNeueBold.otf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: halveticaNeue;
+  src: url("./assets/fonts/helvetica-neue-5/HelveticaNeueHeavy.otf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: halveticaNeue;
+  src: url("./assets/fonts/helvetica-neue-5/HelveticaNeueBlack.otf");
+  font-weight: 800;
+}
+
+// #endregion
+
+
+@media screen and (min-width: 300px) {
+  .product-card{
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, .2);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: .4s;
+    &:hover{
+      box-shadow: 0 0 10px 2px #035fbb38 inset;
+      transition: .4s;
+    }
+    &__image-container{
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      overflow: hidden;
+      &:hover > .product-card__image--primary{
+        opacity: 0;
+        transition: .3s;
+      }
+      &:hover > .product-card__image--secondary{
+        opacity: 1;
+        transition: .3s;
+      }
+    }
+    &__image{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      object-fit: contain;
+      background-color: white;
+      &--primary{
+        z-index: 3;
+        transition: .3s;
+      }
+      &--secondary{
+        z-index: 2;
+        opacity: 0;
+        transition: .3s;
+      }
+    }
+    &__name{
+      font-size: 12px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+    &__price{
+      font-size: 16px;
+    }
+    &__button-container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    &__cart-button{
+      padding: 5px;
+      background-color: white;
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: .3s;
+      &:hover{
+        box-shadow: 1px 2px 8px 1px var(--main-color);
+        transition: .3s;
+      }
+      &:active{
+        scale: .9;
+        transition: .3s;
+      }
+    }
+    &__buy-button{
+      width: 100%;
+      font-size: 13px;
+      background-color: var(--main-color);
+      color: white;
+      border: 1px solid var(--main-color);
+      border-radius: 100px;
+      cursor: pointer;
+      height: 26px;
+      transition: .3s;
+      &:hover{
+        box-shadow: 1px 3px 5px 0 var(--main-color);
+        transition: .3s;
+      }
+      &:active{
+        scale: .9;
+        transition: .3s;
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width: 425px) {
+  .product-card{
+    &__name{
+      font-size: 13px;
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .product-card{
+    padding: 10px 10px 15px;
+    &__name{
+      font-size: 14px;
+    }
+    &__price{
+      font-size: 17px;
+    }
+    &__buy-button{
+      height: 30px;
+    }
+    &__cart-button{
+      padding: 6px;
+    }
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+  .product-card{
+    &__price{
+      font-size: 20px;
+    }
+    &__cart-button{
+      padding: 8px;
+    }
+    &__button-container{
+      gap: 10px;
+    }
+  }
+}

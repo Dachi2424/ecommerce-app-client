@@ -1,0 +1,256 @@
+@keyframes spin {
+  0%{transform: rotate(0deg);}
+  100%{transform: rotate(360deg);}
+}
+
+@keyframes scaled {
+  0%{
+    transform: scale(0) translate(1px, -1px);
+    opacity: 0;
+  }  
+  30%{
+    transform: scale(1.4) translate(2px, -2px) rotate(30deg);
+    opacity: 1;
+  }
+  100%{transform: scale(1) translate(0, 0);}
+}
+
+
+@keyframes fadeIn {
+  0%{opacity: 0;}
+  100%{opacity: 1;}
+}
+
+@keyframes closing {
+  0%{opacity: 1;};
+  100%{opacity: 0;}
+}
+
+@keyframes slideUp {
+  0%{transform: translateY(50px)}
+  70%{transform: translateY(-20px);}
+  100%{transform: translateY(0px)}
+}
+
+
+@media screen and (min-width: 300px) {
+  hr{
+    align-self: stretch;
+    margin: 0 -20px 0 -20px;
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.35);
+  }
+  .auth{
+    height: 100svh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    &__dark-bg{
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      &--visible{
+        animation: fadeIn .3s ease forwards;
+      }
+      &--closing{
+        animation: closing .3s ease forwards;
+      }
+    }
+    &__form-container{
+      background-color: white;
+      width: 270px;
+      border-radius: 15px;
+      position: relative;
+      animation: slideUp .3s ease-out forwards;
+    }
+    &__xmark{
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      cursor: pointer;
+      color: rgba(20, 20, 20);
+    }
+    &__form{
+      width: 100%;
+      height: 100%;
+      padding: 50px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    &__logo-image{
+      width: 60px;
+    }
+    &__heading-container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    &__heading{
+      font-weight: 500;    
+    }
+    &__text{
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--main-gray-color);
+    }
+    &__input-container{
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 100%;
+    }
+    &__input{
+      width: 100%;
+      height: 34px;
+      padding: 0 20px;
+      font-size: 12px;
+      border-radius: 100px;
+      font-weight: 300;
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      transition: .3s;
+      &:focus{
+        border: 1px solid var(--main-color);
+        transition: .3s;
+      }
+    }
+    &__error{
+      position: relative;
+      font-size: 12px;
+      color: red;
+      margin-left: 10px;
+    }
+    &__submit-button{
+      width: 100%;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      background-color: var(--main-color);
+      color: white;
+      border: 1px solid var(--main-color);
+      border-radius: 100px;
+      box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+      height: 34px;
+      transition: .3s;
+      &:focus{
+        transform: scale(.92);
+        transition: .3s;
+      }
+      &:hover{
+        box-shadow: 1px 4px 5px 0 var(--main-color);
+        transition: .3s;
+      }
+      &--loading{
+        
+        transition: .3s;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    &__success-text{
+      color: white;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+    &__check{
+      animation-name: scaled;
+      animation-duration: .7s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+      transform: translate(1px -1px);
+    }
+    &__link-button{
+      width: 100%;
+      height: 34px;
+      font-size: 13px;
+      font-weight: 500;
+      background-color: white;
+      border: 1px solid rgba(0, 0, 0, 0.5);
+      border-radius: 100px;
+      color: var(--main-color);
+      box-shadow: 1px 4px 5px 0 rgba(0, 0, 0, .35);
+      cursor: pointer;
+      transition: .3s;
+      &:focus{
+        transform: scale(0.92);
+        transition: .3s;        
+      }
+      &:hover{
+        box-shadow: 1px 4px 5px 0 var(--main-color);
+        transition: .3s;
+      }
+    }
+    &__button-loader{
+      animation-name: spin;
+      animation-duration: 1s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+  }
+}
+
+
+@media screen and (min-width: 350px) {
+
+  .auth{
+    &__form-container{
+      background-color: white;
+      width: 310px;
+      border-radius: 15px;
+      position: relative;
+    }
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  
+  .auth{
+    &__form-container{
+      background-color: white;
+      width: 360px;
+      border-radius: 15px;
+      position: relative;
+    }
+    &__logo-image{
+      width: 70px;
+    }
+    &__heading{
+      font-weight: 500;    
+      font-size: 18px;
+    }
+    &__text{
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--main-gray-color);
+    }
+    &__input{
+      height: 45px;
+      padding: 0 22px;
+      font-size: 14px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+     &__submit-button{
+      font-size: 14px;
+      box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+      height: 45px;
+    }
+    &__link-button{
+      height: 45px;
+      font-size: 14px;
+    }
+  }
+}
