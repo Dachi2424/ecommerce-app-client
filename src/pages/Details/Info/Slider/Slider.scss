@@ -1,12 +1,12 @@
 
 @keyframes fadeIn {
-  0%{transform: translateY(100svh);}
-  100%{transform: translateY(0svh);}
+  0%{transform: translateY(100svh) translateX(-50%);}
+  100%{transform: translateY(0svh) translateX(-50%);}
 }
 
 @keyframes fadeOut {
-  0%{transform: translateY(0svh);}
-  100%{transform: translateY(100svh);}
+  0%{transform: translateY(0svh) translateX(-50%);}
+  100%{transform: translateY(100svh) translateX(-50%)}
 }
 
 @keyframes bgAppear {
@@ -50,6 +50,32 @@
       &--closing{
         animation: fadeOut .5s ease-in-out forwards;
       }
+    }
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+  .slider{
+    &__main-container{
+      border-radius: 12px;
+      width: 600px;
+      height: 440px;
+      left: 50%;
+      bottom: 20%;
+      transform: translateX(100px);
+    }
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .slider{
+    &__main-container{
+      width: 770px;
+      height: 580px;
+      left: 50%;
+      bottom: 17%;
+      transform: translateX(100px);
     }
   }
 }

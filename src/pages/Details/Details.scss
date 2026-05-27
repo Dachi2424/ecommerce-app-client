@@ -2,19 +2,24 @@
 
 @media screen and (min-width: 300px) {
   .details{
-    padding: 20px;
+    padding: 20px 20px 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
   }
 }
 
 @media screen and (min-width: 800px) {
   .details{
-    padding: 30px 80px 30px;
+    padding: 30px 80px 120px;
+    gap: 80px;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .details{
     padding: 30px 100px 30px;
+    gap: 100px;
   }
 }
 @media screen and (min-width: 1300px) {

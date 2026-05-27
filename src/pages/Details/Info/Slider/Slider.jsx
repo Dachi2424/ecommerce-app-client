@@ -17,7 +17,7 @@ export default function Slider({product, setOpenSlider}) {
     <div className='slider'>
       <div onClick={closeSlider} className={`slider__dark-background ${closing && "slider__dark-background--closing"}`}>
         <div onClick={e => e.stopPropagation()} className={`slider__main-container ${closing && "slider__main-container--closing"}`}>
-
+          
         </div>
       </div>
     </div>
