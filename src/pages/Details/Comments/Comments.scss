@@ -13,7 +13,7 @@
     &__textarea-container{
       width: 100%;
       display: grid;
-      margin-bottom: 50px;
+      margin-bottom: 0px;
       grid-template-columns: 6fr 1fr;
       grid-template-rows: 1fr 1fr;
       gap: 10px;
@@ -61,11 +61,36 @@
       border-radius: 5px;
       font-weight: 500;
     }
+    &__rating-main-container{
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 60px;
+    }
+    &__rating-main-icon{
+      font-size: 20px;
+      color: orange;
+      cursor: pointer;
+    }
+    &__rating-status{
+      font-size: 14px;
+      color: var(--main-gray-color)
+    }
+    &__comment-error{
+      position: absolute;
+      left: 0;
+      bottom: -30px;
+      color: red;
+      font-size: 13px;
+    }
     &__grid-container{
       display: flex;
       flex-direction: column;
       align-items: start;
-      gap: 20px;
+      gap: 40px;
     }
     &__comment-box{
       display: flex;
@@ -121,7 +146,7 @@
       font-size: 12px;
     }
     &__commentbody-div{
-
+      
     }
     &__comment{
       font-size: 13px;

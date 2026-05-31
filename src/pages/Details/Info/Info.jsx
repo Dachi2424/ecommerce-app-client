@@ -17,7 +17,7 @@ export default function Info({id}) {
     async function getDetailedInfo(){
       try{
         const res = await axios.get(`http://localhost:3001/products/${id}`)
-        // console.log(res.data)
+        console.log(res.data)
         setProduct(res.data)
       } catch(err){
         console.log(err)
