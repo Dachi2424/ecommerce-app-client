@@ -24,7 +24,7 @@ export default function Info({id}) {
       }
     }
     getDetailedInfo()
-  }, [])
+  }, [id])
 
   useEffect(() => {
     if(openSlider){

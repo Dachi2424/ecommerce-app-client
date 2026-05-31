@@ -39,6 +39,10 @@
       grid-row: 2 / 3;
       overflow-x: auto;
       overflow-y: hidden;
+      scrollbar-width: none;
+      &::-webkit-scrollbar{
+        display: none;
+      }
     }
     &__image-div{
       border: 1px solid white;
@@ -92,16 +96,6 @@
       }
       &--right{
         right: 0;
-      }
-    }
-    &__arrow{
-
-      
-      &--left{
-        
-      }
-      &--right{
-        
       }
     }
 
@@ -252,16 +246,6 @@
       }
       &--right{
         right: 0;
-      }
-    }
-    &__arrow{
-
-      
-      &--left{
-        
-      }
-      &--right{
-        
       }
     }
 

@@ -1,10 +1,130 @@
 
 @media screen and (min-width: 300px) {
   .header{
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 0 30px 0;
+    &__logo{
+      height: 50px;
+    }
+    &__loggedin-auth{
+      display: none;
+    }
+    &__loggedout-auth{
+      display: none;
+    }
+    &__language-container{
+      border-radius: 50%;
+      padding: 10px;
+      transition: .4s;
+      cursor: pointer;
+      &:hover{
+        box-shadow: 0 1px 5px var(--main-color);
+        transition: .4s;
+      }
+    }
+  }
+}
+
+
+
+
+@media screen and (min-width: 1024px) {
+  .header{
     height: 80px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: cyan;
+    justify-content: space-between;
+    background-color: white;
+    border-bottom: 2px solid black;
+    padding: 0 180px 0;
+    &__right-container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+    &__cart-main-container{
+      position: relative;
+    }
+    &__cart-container{
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border-radius: 50%;
+      background-color: var(--main-color);
+      cursor: pointer;
+    }
+    &__cart-icon{
+      color: white;
+    }
+    &__cart-quantity{
+      background-color: white;
+      font-size: 13px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: var(--main-color);
+      font-weight: 500;
+      &--active{
+        display: flex;
+      }
+    }
+    &__cart-fallback{
+
+    }
+
+    &__loggedout-auth{
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background-color: white;
+      border-radius: 100px;
+      padding: 8px 20px;
+      cursor: pointer;
+      transition: .3s;
+      &:hover{
+        box-shadow: 0 2px 8px 1px var(--main-color);
+        transition: .3s;
+      }
+      &:active{
+        transform: scale(.92);
+        transition: .3s;
+      }
+    }
+    &__signin-text{
+      color: black;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    &__loggedin-auth{
+      display: unset;
+      
+    }
+
+    &__user-icon{
+
+      &--loggedin{
+
+      }
+      &--loggedout{
+
+      }
+    }
+    
+
+
   }
 }

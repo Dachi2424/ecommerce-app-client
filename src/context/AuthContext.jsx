@@ -13,7 +13,7 @@ function AuthProvider({children}){
       try{
         const res = await axios.get("http://localhost:3001/auth", {withCredentials: true})
         setLoggedin(res.data)
-        console.log(res.data)
+        // console.log(res.data)
       } catch(err){
         console.log(err)
       }
