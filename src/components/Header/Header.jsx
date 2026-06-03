@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState, useContext, useEffect } from 'react'
 import { CircleUser, ShoppingCart } from "lucide-react"
 import { AuthContext } from '../../context/AuthContext'
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import './Header.scss'
 const Cart = lazy(() => import("../Cart/Cart"))
@@ -8,12 +9,14 @@ import Logo from "../../assets/logo-text.png"
  
 export default function Header({setAuthOpen}) {
  
+  const navigate = useNavigate()
   const [openCart, setOpenCart] = useState(false) 
   const {loggedin} = useContext(AuthContext)
   const [cartData, setCartData] = useState([])
   const [totalQuantity, setTotalQuantity] = useState(0)
   const [totalMoney, setTotalMoney] = useState(0)
 
+  
 
   function calculateQuantity(data){
     const totalQuantity = data.reduce((accumulator, currentValue) => {
@@ -40,12 +43,17 @@ export default function Header({setAuthOpen}) {
 
   useEffect(() => {
     getCartItems()
-  }, [])
+  }, [loggedin])
+
+
+  function handleNavigateProfile(){
+    navigate("/profile")
+  }
 
 
   return (
     <header className='header'>
-      <img className='header__logo' src={Logo} alt="" />
+      <img onClick={() => navigate("/")} className='header__logo' src={Logo} alt="EliteByte" />
         <div className='header__right-container'>
           {/* cart */}
           <div 
@@ -66,8 +74,8 @@ export default function Header({setAuthOpen}) {
               <span className='header__signin-text'>Sign In</span>
             </div>
           ) : (
-            <div onClick={() => setAuthOpen(true)} className='header__loggedin-auth'>
-              <CircleUser className='header__user-icon header__user-icon--loggedin' size={20}/>
+            <div onClick={handleNavigateProfile} className='header__loggedin-auth'>
+              <CircleUser className='header__user-icon header__user-icon--loggedin' size={24}/>
             </div>
           )}
 

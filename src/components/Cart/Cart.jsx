@@ -1,4 +1,5 @@
 import './Cart.scss'
+import EmptyCart from "../../assets/empty-cart.png"
 import {X} from "lucide-react"
 import axios from "axios"
 import {useNavigate} from "react-router-dom"
@@ -47,6 +48,12 @@ export default function Cart({cartData, totalQuantity, totalMoney, setOpenCart, 
       console.log(err)
     }
   }
+
+
+  function handleNavigateCart(){
+    setOpenCart(false)
+    navigate("/cart")
+  }
   
   return (
     <div className='cart'>
@@ -77,13 +84,18 @@ export default function Cart({cartData, totalQuantity, totalMoney, setOpenCart, 
               <span className='cart__total-text'>Total Amount To Pay</span>
               <span className='cart__total-money'>{totalMoney}₾</span>
             </div>
-            <button className='cart__cart-button'>Open Cart</button>
+            <button onClick={handleNavigateCart} className='cart__cart-button'>Open Cart</button>
           </div>
         </div>
       ) : (
         // empty cart
         <div className='cart__empty-cart-container'>
-
+          <h2 className='cart__empty-cart-text'>The Cart Is Empty</h2>
+          <p className='cart__add-items-text'>Add items in order to purchase them</p>
+          <div className='cart__empty-cart-image-div'>
+            <img className='cart__empty-cart-image' src={EmptyCart} alt="empty cart" />
+          </div>
+          <button onClick={handleNavigateCart} className='cart__cart-button cart__cart-button--empty'>Open Cart</button>
         </div>
       )}
     </div>
