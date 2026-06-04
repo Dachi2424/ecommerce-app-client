@@ -1,8 +1,8 @@
-import { lazy, Suspense, useState, useContext, useEffect } from 'react'
+import { lazy, Suspense, useState, useContext } from 'react'
 import { CircleUser, ShoppingCart } from "lucide-react"
 import { AuthContext } from '../../context/AuthContext'
+import { CartContext } from "../../context/CartContext"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
 import './Header.scss'
 const Cart = lazy(() => import("../Cart/Cart"))
 import Logo from "../../assets/logo-text.png"
@@ -11,45 +11,21 @@ export default function Header({setAuthOpen}) {
  
   const navigate = useNavigate()
   const [openCart, setOpenCart] = useState(false) 
+  
   const {loggedin} = useContext(AuthContext)
-  const [cartData, setCartData] = useState([])
-  const [totalQuantity, setTotalQuantity] = useState(0)
-  const [totalMoney, setTotalMoney] = useState(0)
+  const {items} = useContext(CartContext)
 
-  
-
-  function calculateQuantity(data){
-    const totalQuantity = data.reduce((accumulator, currentValue) => {
-      return accumulator + currentValue.quantity
-    }, 0)
-    const totalMoney = data.reduce((acc, current) => {
-      return acc + (current.quantity * Number(current.Product?.price))
-    }, 0)
-    setTotalQuantity(totalQuantity)
-    setTotalMoney(totalMoney)
-  }
-  
-  
-  async function getCartItems(){
-    try{
-      const res = await axios.get("http://localhost:3001/cart", {withCredentials: true})
-      console.log(res.data)
-      setCartData(res.data)
-      calculateQuantity(res.data)
-    } catch(err){
-      console.log(err)
-    }
-  }
-
-  useEffect(() => {
-    getCartItems()
-  }, [loggedin])
-
+  const totalQuantity = items.reduce((acc, item) => acc + item.quantity, 0)
+  const totalMoney = items.reduce((acc, item) => acc + (item.quantity * Number(item.Product?.price)), 0)
 
   function handleNavigateProfile(){
     navigate("/profile")
   }
 
+  function handleNavigateCart(){
+    setOpenCart(false)
+    navigate("/cart")
+  }
 
   return (
     <header className='header'>
@@ -61,9 +37,12 @@ export default function Header({setAuthOpen}) {
             onMouseEnter={() => setOpenCart(true)}
             onMouseLeave={() => setOpenCart(false)}  
           >
-            <div className='header__cart-container'><ShoppingCart className='header__cart-icon' size={24}/> <span className={`header__cart-quantity ${totalQuantity > 0 ? "header__cart-quantity--active" : ""}`}>{totalQuantity}</span> </div>
+            <div onClick={handleNavigateCart} className='header__cart-container'>
+              <ShoppingCart className='header__cart-icon' size={24}/> 
+              <span className={`header__cart-quantity ${totalQuantity > 0 ? "header__cart-quantity--active" : ""}`}>{totalQuantity}</span> 
+            </div>
             <Suspense fallback={<div className='header__cart-fallback'></div>}>
-              {openCart && <Cart cartData={cartData} totalQuantity={totalQuantity} totalMoney={totalMoney} setOpenCart={setOpenCart} refreshCart={getCartItems} />}
+              {openCart && <Cart handleNavigateCart={handleNavigateCart} totalQuantity={totalQuantity} totalMoney={totalMoney} setOpenCart={setOpenCart} />}
             </Suspense>
           </div>
 

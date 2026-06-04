@@ -1,13 +1,15 @@
 import './Cart.scss'
 import EmptyCart from "../../assets/empty-cart.png"
 import {X} from "lucide-react"
-import axios from "axios"
 import {useNavigate} from "react-router-dom"
+import {CartContext} from "../../context/CartContext"
+import {useContext} from "react"
  
- 
-export default function Cart({cartData, totalQuantity, totalMoney, setOpenCart, refreshCart}) {
+
+export default function Cart({handleNavigateCart, totalQuantity, totalMoney, setOpenCart}) {
  
   const navigate = useNavigate()
+  const {items, updateQuantity, deleteProduct} = useContext(CartContext)
 
 
   function navigateToProduct(id){
@@ -15,49 +17,22 @@ export default function Cart({cartData, totalQuantity, totalMoney, setOpenCart, 
     navigate(`/details/${id}`)
   }
 
-  async function deleteOne(productId){
-    try{
-      const res = await axios.delete(`http://localhost:3001/cart/${productId}`, {withCredentials: true})
-      console.log(res)
-      await refreshCart()
-    } catch(err){
-      console.log(err)
-    }
-  }
-
-
   async function handleDecrementQuantity(productId, quantity){
-    if(quantity === 1){
-      deleteOne(productId)
+    if(quantity <= 1){
+      await deleteProduct(productId)
       return;
     }
-    try{
-      const res = await axios.patch(`http://localhost:3001/cart/${productId}`, {quantity: quantity - 1}, {withCredentials: true})
-      console.log(res)
-      await refreshCart()
-    } catch(err){
-      console.log(err)
-    }
+    await updateQuantity({productId, quantity: quantity - 1})
   }
+
   async function handleIncrementQuantity(productId, quantity){
-    try{
-      const res = await axios.patch(`http://localhost:3001/cart/${productId}`, {quantity: quantity + 1}, {withCredentials: true})
-      console.log(res)
-      await refreshCart()
-    } catch(err){
-      console.log(err)
-    }
+    await updateQuantity({productId, quantity: quantity + 1})
   }
 
-
-  function handleNavigateCart(){
-    setOpenCart(false)
-    navigate("/cart")
-  }
   
   return (
     <div className='cart'>
-      {cartData.length !== 0 ? (
+      {items.length !== 0 ? (
         //filled cart
         <div className='cart__filled-cart-container'>
           <div className='cart__filled-upper-container'>
@@ -65,9 +40,9 @@ export default function Cart({cartData, totalQuantity, totalMoney, setOpenCart, 
             <span className='cart__quantity-text'>{totalQuantity} products</span>
           </div>
           <div className='cart__product-container'>
-            {cartData.map((item, index) => (
+            {items.map((item, index) => (
               <div className='cart__product-box' key={index}>
-                <X onClick={() => deleteOne(item.productId)} className='cart__xmark' size={14} />
+                <X onClick={() => deleteProduct(item.productId)} className='cart__xmark' size={14} />
                 <img onClick={() => navigateToProduct(item.productId)} className='cart__product-image' src={item.Product?.imageUrl?.[0]} alt={item.Product?.name} />
                 <p onClick={() => navigateToProduct(item.productId)} className='cart__product-name'>{item.Product?.name}</p>
                 <span className='cart__product-price'>{item.Product?.price}₾</span>

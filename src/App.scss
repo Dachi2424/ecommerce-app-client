@@ -6,6 +6,12 @@
   font-family: halveticaNeue;
 }
 
+body{
+  max-width: 1200px;
+  width: 100%;
+  margin-inline: auto;
+}
+
 input, textarea, select, option, a, label, button{
   font-size: 16px;
   outline: none;
@@ -212,3 +218,8 @@ input, textarea, select, option, a, label, button{
     }
   }
 }
+
+
+
+
+
