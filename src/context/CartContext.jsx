@@ -83,7 +83,7 @@ function CartProvider({children}){
       try{
         const res = await axios.get(BASE_URL, {withCredentials: true})
         dispatch({ type: ACTIONS.SET_CART, payload: res.data})
-        console.log(res)
+        console.log(res.data)
       } catch(err){
         dispatch({type: ACTIONS.SET_ERROR, payload: err.message})
       }

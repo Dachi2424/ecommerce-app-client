@@ -3,9 +3,15 @@
 
 @media screen and (min-width:1024px) {
   .products{
-    padding: 70px 10% 20px 10%;
+    padding: 70px 80px 20px;
     display: flex;
     align-items: start;
     gap: 10px;
+  }
+}
+
+@media screen and (min-width:1300px) {
+  .products{
+    padding: 70px 0px 20px;
   }
 }

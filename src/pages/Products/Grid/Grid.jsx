@@ -1,15 +1,29 @@
 import {ShoppingCart, Funnel} from "lucide-react"
 import {useNavigate} from "react-router-dom"
 import './Grid.scss'
+import { CartContext } from "../../../context/CartContext"
+import { useContext } from "react"
  
  
 export default function Grid({products, setProducts}) {
  
   const navigate = useNavigate()
+  const {addToCart} = useContext(CartContext)
 
   function handleNavigate(id){
     navigate(`/details/${id}`)
   }
+
+  async function handleAddToCart(product) {
+    try{
+      await addToCart({...product, productId: product.id, quantity: 1, Product: product})
+    } catch(err){
+      console.log(err)
+    }
+  }
+
+
+
 
   return (
     <div className='grid'>
@@ -32,7 +46,7 @@ export default function Grid({products, setProducts}) {
             <p className='product-card__name'>{product.name}</p>
             <h1 className='product-card__price'>{product.price}<span>₾</span></h1>
             <div className='product-card__button-container'>
-              <div className='product-card__cart-button'><ShoppingCart size={14} strokeWidth={1.4}/></div>
+              <div onClick={() => handleAddToCart(product)} className='product-card__cart-button'><ShoppingCart size={14} strokeWidth={1.4}/></div>
               <button onClick={() => handleNavigate(product.id)} className='product-card__buy-button'>See details</button>
             </div>
           </div>
