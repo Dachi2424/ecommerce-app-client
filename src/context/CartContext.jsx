@@ -130,13 +130,12 @@ function CartProvider({children}){
 
   // 5. clear the cart
   async function clearCart() {
-    dispatch({ type: ACTIONS.SET_LOADING, payload: true })
     try{
       await axios.delete(BASE_URL, {withCredentials: true})
-      dispatch({ type: ACTIONS.CLEAR_CART })
     } catch(err){
-      dispatch({ type: ACTIONS.SET_ERROR, payload: err.message })
+      console.log(err);
     }
+    dispatch({ type: ACTIONS.CLEAR_CART })
   }
 
 

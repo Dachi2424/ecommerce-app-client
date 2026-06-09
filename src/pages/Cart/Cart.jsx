@@ -4,12 +4,14 @@ import { Trash2, BrushCleaning } from "lucide-react"
 import './Cart.scss'
 import EmptyCart from "../../assets/empty-cart.png"
 import { useNavigate } from "react-router-dom"
+import CreditForm from '../../components/CreditForm/CreditForm'
  
 export default function Cart() {
 
   const navigate = useNavigate()
   const {items, loading, error, updateQuantity, deleteProduct, clearCart} = useContext(CartContext)
   const [pageLoading, setPageLoading] = useState(true)
+  const [creditFormOpen, setCreditFormOpen] = useState(false)
 
   const totalMoney = items.reduce((acc, item) => acc + (Number(item.Product?.price) * item.quantity), 0)
 
@@ -95,10 +97,11 @@ export default function Cart() {
               <span className='cartpage__sum-text'>Sum Amount:</span>
               <span className='cartpage__overall-price'>{totalMoney}₾</span>
             </div>
-            <button className='cartpage__next-button'>Next</button>
+            <button onClick={() => setCreditFormOpen(true)} className='cartpage__next-button'>Buy</button>
           </div>
         </div>
       )}
+      {creditFormOpen && <CreditForm totalMoney={totalMoney} setCreditFormOpen={setCreditFormOpen} />}
     </section>
   )
 }
