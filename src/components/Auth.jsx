@@ -3,8 +3,8 @@ import Logo from "../assets/logo.png"
 import './Auth.scss'
 import { useContext, useState } from "react"
 import {X, Loader2, CircleCheck} from "lucide-react"
-import axios from "axios"
 import { AuthContext } from "../context/AuthContext"
+import { CartContext } from "../context/CartContext"
  
 
  
@@ -16,7 +16,8 @@ export default function Auth({setAuthOpen}) {
   const [success, setSuccess] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
 
-  const {refreshAuth} = useContext(AuthContext)
+  const {logIn, signUp} = useContext(AuthContext)
+  const {fetchCart} = useContext(CartContext)
 
 
 
@@ -29,13 +30,12 @@ export default function Auth({setAuthOpen}) {
     setLoading(true)
     if(!signinForm){
       try{
-        const res = await axios.post("http://localhost:3001/auth/signup", data, {withCredentials: true})
-        console.log(res.data);
+        await signUp(data);
         reset();
         setSigninForm(true);
       }catch(err){
         console.log(err)
-        setError("password", {message: err.response.data.error})
+        setError("password", {message: err.response?.data?.error || err.message})
       } finally{
         setLoading(false)
       }
@@ -43,15 +43,14 @@ export default function Auth({setAuthOpen}) {
     
     else if(signinForm){
       try{
-        const res = await axios.post("http://localhost:3001/auth/login", data, {withCredentials: true})
-        console.log(res.data)
-        await refreshAuth()
+        await logIn(data)
+        await fetchCart()
         setSuccess(true)
         setTimeout(() => {
           handleClose()
         }, 900)
       } catch(err){
-        setError("password", {message: err.response.data.error})
+        setError("password", {message: err.response?.data?.error || err.message})
         console.log(err)
       } finally{
         setLoading(false)

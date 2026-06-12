@@ -12,7 +12,7 @@ export default function Header({setAuthOpen}) {
   const navigate = useNavigate()
   const [openCart, setOpenCart] = useState(false) 
   
-  const {loggedin} = useContext(AuthContext)
+  const {user} = useContext(AuthContext)
   const {items} = useContext(CartContext)
 
   const totalQuantity = items.reduce((acc, item) => acc + item.quantity, 0)
@@ -47,7 +47,7 @@ export default function Header({setAuthOpen}) {
           </div>
 
           {/* auth */}
-          {!loggedin ? (
+          {!user ? (
             <div onClick={() => setAuthOpen(true)} className='header__loggedout-auth'>
               <CircleUser className='header__user-icon header__user-icon--loggedout' size={20} strokeWidth={2.4} />
               <span className='header__signin-text'>Sign In</span>

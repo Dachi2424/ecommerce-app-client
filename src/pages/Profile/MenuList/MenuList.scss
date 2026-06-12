@@ -1,0 +1,38 @@
+
+@media screen and (min-width: 300px) {
+  .menulist{
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding: 20px;
+    &__heading{
+      font-size: 16px;
+      font-weight: 600;
+    }
+    &__nav{
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      padding: 0 10px;
+    }
+    &__link-container{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    &__link-name{
+
+    }
+    &__chevron-icon{
+      margin-left: auto;
+    }
+    &__logout{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--main-color);
+      cursor: pointer;
+    }
+  }
+}

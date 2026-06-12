@@ -76,18 +76,20 @@ function CartProvider({children}){
 
   const [state, dispatch] = useReducer(CartReducer, initialState)
 
+
+  async function fetchCart(){
+    dispatch({type: ACTIONS.SET_LOADING, payload: true})
+    try{
+      const res = await axios.get(BASE_URL, {withCredentials: true})
+      dispatch({ type: ACTIONS.SET_CART, payload: res.data})
+      
+    } catch(err){
+      dispatch({type: ACTIONS.SET_ERROR, payload: err.message})
+    }
+  }
+
   useEffect(() => {
     // 1. get cart data
-    async function fetchCart(){
-      dispatch({type: ACTIONS.SET_LOADING, payload: true})
-      try{
-        const res = await axios.get(BASE_URL, {withCredentials: true})
-        dispatch({ type: ACTIONS.SET_CART, payload: res.data})
-        console.log(res.data)
-      } catch(err){
-        dispatch({type: ACTIONS.SET_ERROR, payload: err.message})
-      }
-    }
     fetchCart()
   }, [])
 
@@ -141,7 +143,7 @@ function CartProvider({children}){
 
 
   return(
-    <CartContext.Provider value={{ ...state, addToCart, updateQuantity, deleteProduct, clearCart }}>
+    <CartContext.Provider value={{ ...state, fetchCart, addToCart, updateQuantity, deleteProduct, clearCart }}>
       {children}
     </CartContext.Provider>
   )
